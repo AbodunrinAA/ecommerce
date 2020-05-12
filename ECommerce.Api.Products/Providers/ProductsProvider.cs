@@ -62,18 +62,26 @@ namespace ECommerce.Api.Products.Providers
             try
             {
                 logger?.LogInformation("Querying products");
+
                 var products = await dbContext.Products.ToListAsync();
+
                 if (products!=null && products.Any())
                 {
                     logger?.LogInformation($"{products.Count} product(s) found");
+
                     var result = mapper.Map<IEnumerable<Product>>(products);
+
                     return (true, result, null);
                 }
+
                 return (false, null, "Not found");
+
             }
             catch (Exception ex)
             {
+
                 logger?.LogError(ex.ToString());
+
                 return (false, null, ex.Message);
             }
         }

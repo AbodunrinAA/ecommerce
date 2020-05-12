@@ -26,10 +26,14 @@ namespace ECommerce.Api.Search
             services.AddScoped<IOrdersService, OrdersService>();
             services.AddScoped<ICustomersService, CustomersService>();
             services.AddScoped<ISearchService, SearchService>();
+            
             services.AddHttpClient("ProductsService", config =>
             {
                 config.BaseAddress = new Uri(Configuration["Services:Products"]);
-            }).AddTransientHttpErrorPolicy(p => p.WaitAndRetryAsync(5, _ => TimeSpan.FromMilliseconds(500)));
+
+            }).AddTransientHttpErrorPolicy(p => 
+                p.WaitAndRetryAsync(5, _ => TimeSpan.FromMilliseconds(500)));
+
             services.AddHttpClient("OrdersService", config =>
             {
                 config.BaseAddress = new Uri(Configuration["Services:Orders"]);

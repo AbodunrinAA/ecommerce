@@ -25,9 +25,13 @@ namespace ECommerce.Api.Products
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationInsightsTelemetry("8ea3060a-8e0e-4368-830a-48b2d4116c97");
+
             services.AddControllers();
+
             services.AddScoped<IProductsProvider, ProductsProvider>();
+
             services.AddAutoMapper(typeof(Startup));
+
             services.AddDbContext<ProductsDbContext>(options =>
                 options.UseInMemoryDatabase("Products"));
         }

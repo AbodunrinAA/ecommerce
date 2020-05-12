@@ -5,6 +5,8 @@
         public ProductProfile()
         {
             CreateMap<Db.Product, Models.Product>();
+
+            CreateMap<Models.Product, Db.Product>();
         }
     }
 }
